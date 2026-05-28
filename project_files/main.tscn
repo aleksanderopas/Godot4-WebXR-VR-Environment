@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkrn7gp2lwq48"]
+[gd_scene load_steps=24 format=3 uid="uid://dkrn7gp2lwq48"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cqhb2w6fy5be1" path="res://assets/models/l_hand.glb" id="2_h2yge"]
@@ -28,6 +28,24 @@ albedo_color = Color(0.843505, 0.777882, 0.107733, 1)
 material = SubResource("StandardMaterial3D_k6ryk")
 size = Vector3(10, 5, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7fj4"]
+albedo_color = Color(1, 0.458824, 0.117647, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_fqh3j"]
+material = SubResource("StandardMaterial3D_h7fj4")
+size = Vector3(10, 1.5, 3)
+subdivide_width = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5khk1"]
+albedo_color = Color(0.350845, 0.186761, 0.0317, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a0soy"]
+material = SubResource("StandardMaterial3D_5khk1")
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iudmt"]
+size = Vector3(10, 5, 3)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi141"]
 albedo_color = Color(0.536992, 0.372236, 0.104817, 1)
 
@@ -44,21 +62,6 @@ albedo_color = Color(0.153357, 0.608492, 3.46541e-06, 1)
 material = SubResource("StandardMaterial3D_a8yae")
 radius = 1.49
 height = 1.99
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7fj4"]
-albedo_color = Color(1, 0.458824, 0.117647, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_fqh3j"]
-material = SubResource("StandardMaterial3D_h7fj4")
-size = Vector3(10, 1.5, 3)
-subdivide_width = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5khk1"]
-albedo_color = Color(0.350845, 0.186761, 0.0317, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_a0soy"]
-material = SubResource("StandardMaterial3D_5khk1")
-size = Vector3(1, 2, 0.1)
 
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 1
@@ -125,22 +128,30 @@ shape = SubResource("BoxShape3D_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 mesh = SubResource("BoxMesh_kpbcq")
 
+[node name="roof" type="MeshInstance3D" parent="Level/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25048, 0)
+mesh = SubResource("PrismMesh_fqh3j")
+skeleton = NodePath("../..")
+
+[node name="door" type="MeshInstance3D" parent="Level/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.52568)
+mesh = SubResource("BoxMesh_a0soy")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+shape = SubResource("BoxShape3D_iudmt")
+
 [node name="tree" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 0.999948, -0.0101576, 0, 0.0101576, 0.999948, 6.235, 1.5, 7.58422)
+transform = Transform3D(1, 0, 0, 0, 0.999948, -0.0101576, 0, 0.0101576, 0.999948, 6.235, 0.839802, 7.58422)
 mesh = SubResource("CylinderMesh_fii5x")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Level/tree"]
 transform = Transform3D(1, 0, 0, 0, 0.999949, 0.0101576, 0, -0.0101576, 0.999949, 0, 1.49992, -0.0155067)
 mesh = SubResource("SphereMesh_idrq1")
 skeleton = NodePath("../..")
-
-[node name="roof" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25048, -8)
-mesh = SubResource("PrismMesh_fqh3j")
-
-[node name="door" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.47432)
-mesh = SubResource("BoxMesh_a0soy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999994, 0.00349065, 1.16415e-10, -0.00271275, 0.777141, 0.62932, 0.00219674, -0.629317, 0.777146, -0.337303, 4.52581, 2.61957)
