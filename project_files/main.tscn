@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dkrn7gp2lwq48"]
+[gd_scene load_steps=31 format=3 uid="uid://dkrn7gp2lwq48"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cqhb2w6fy5be1" path="res://assets/models/l_hand.glb" id="2_h2yge"]
@@ -67,9 +67,25 @@ height = 1.99
 height = 3.0
 radius = 0.3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_goot5"]
+albedo_color = Color(0.48585, 0.442701, 0.648458, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v5oow"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hxvv3"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnso2"]
+albedo_color = Color(0.175547, 0.722812, 0.76431, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u10ec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0swc2"]
+
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 1
-background_color = Color(0.266667, 0.247059, 0.376471, 1)
+background_color = Color(0.182289, 0.242242, 0.370582, 1)
 background_energy_multiplier = 2.75
 ambient_light_color = Color(0.895678, 0.774288, 0.743822, 1)
 
@@ -159,8 +175,27 @@ skeleton = NodePath("../..")
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/tree"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/tree/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_kfu3l")
+
+[node name="box1" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84858, 0, 7.9487)
+material_override = SubResource("StandardMaterial3D_goot5")
+mesh = SubResource("BoxMesh_v5oow")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/box1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/box1/StaticBody3D"]
+shape = SubResource("BoxShape3D_hxvv3")
+
+[node name="box2" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78397, 0, 5.19787)
+material_override = SubResource("StandardMaterial3D_xnso2")
+mesh = SubResource("BoxMesh_u10ec")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level/box2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/box2/StaticBody3D"]
+shape = SubResource("BoxShape3D_0swc2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999994, 0.00349065, 1.16415e-10, -0.00271275, 0.777141, 0.62932, 0.00219674, -0.629317, 0.777146, -0.337303, 4.52581, 2.61957)
