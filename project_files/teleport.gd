@@ -19,8 +19,19 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if ray.is_colliding():
+		# 1. Pobieramy punkt uderzenia i normalną ściany/obiektu
 		var hit_point = ray.get_collision_point()
-		marker.global_transform.origin = Vector3(hit_point.x, 0.0, hit_point.z)
+		var normal = ray.get_collision_normal()
+		
+		# Spłaszczamy wektor normalnej do poziomu (X, Z)
+		normal.y = 0.0
+		normal = normal.normalized()
+		
+		# 2. Obliczamy bezpieczną pozycję (taką samą, na jaką trafisz po teleportacji)
+		var safe_marker_pos = hit_point + (normal * player_radius)
+		
+		# 3. Ustawiamy marker na poziomie ziemi (Y = 0.01 dla uniknięcia migania)
+		marker.global_transform.origin = Vector3(safe_marker_pos.x, 0.01, safe_marker_pos.z)
 		marker.visible = true
 	else:
 		marker.visible = false
