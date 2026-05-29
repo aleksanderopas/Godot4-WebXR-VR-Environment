@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dkrn7gp2lwq48"]
+[gd_scene load_steps=36 format=3 uid="uid://dkrn7gp2lwq48"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cqhb2w6fy5be1" path="res://assets/models/l_hand.glb" id="2_h2yge"]
@@ -35,7 +35,7 @@ material = SubResource("StandardMaterial3D_k6ryk")
 size = Vector3(10, 5, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7fj4"]
-albedo_color = Color(1, 0.458824, 0.117647, 1)
+albedo_color = Color(0.900732, 0.370357, 0.142871, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_fqh3j"]
 material = SubResource("StandardMaterial3D_h7fj4")
@@ -49,8 +49,21 @@ albedo_color = Color(0.350845, 0.186761, 0.0317, 1)
 material = SubResource("StandardMaterial3D_5khk1")
 size = Vector3(1, 2, 0.1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etnet"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8mgjk"]
+radius = 0.08
+height = 0.16
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_iudmt"]
 size = Vector3(10, 5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmkir"]
+albedo_color = Color(0.494118, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dog3"]
+size = Vector3(1.5, 1.5, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi141"]
 albedo_color = Color(0.536992, 0.372236, 0.104817, 1)
@@ -165,10 +178,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.52568)
 mesh = SubResource("BoxMesh_a0soy")
 skeleton = NodePath("../..")
 
+[node name="klamka" type="MeshInstance3D" parent="Level/wall/door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335991, 0.116556, 0.0571151)
+material_override = SubResource("StandardMaterial3D_etnet")
+mesh = SubResource("SphereMesh_8mgjk")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/wall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/wall/StaticBody3D"]
 shape = SubResource("BoxShape3D_iudmt")
+
+[node name="wiundow" type="MeshInstance3D" parent="Level/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.105, 1.52)
+material_override = SubResource("StandardMaterial3D_hmkir")
+mesh = SubResource("BoxMesh_7dog3")
+
+[node name="window" type="MeshInstance3D" parent="Level/wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.105, 1.52)
+material_override = SubResource("StandardMaterial3D_hmkir")
+mesh = SubResource("BoxMesh_7dog3")
 
 [node name="tree" type="MeshInstance3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 0.999948, -0.0101576, 0, 0.0101576, 0.999948, 6.235, 0.839802, 7.58422)
