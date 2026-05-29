@@ -65,7 +65,7 @@ func teleport_now() -> void:
 	var cam_tf := xr_camera.global_transform
 	var cam_offset := cam_tf.origin - origin_tf.origin
 	cam_offset.y = 0.0
-	origin_tf.origin = Vector3(target.x - cam_offset.x, target.y, target.z - cam_offset.z)
+	origin_tf.origin = Vector3(target.x - cam_offset.x, 0.0, target.z - cam_offset.z)
 	xr_origin.global_transform = origin_tf
 
 func _on_button_pressed(button_name: String) -> void:

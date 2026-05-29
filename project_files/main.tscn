@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dkrn7gp2lwq48"]
+[gd_scene load_steps=32 format=3 uid="uid://dkrn7gp2lwq48"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cqhb2w6fy5be1" path="res://assets/models/l_hand.glb" id="2_h2yge"]
@@ -10,7 +10,13 @@
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5vw27"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dehba"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_kek77"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
 size = Vector2(20, 20)
@@ -122,6 +128,7 @@ target_position = Vector3(0, 0, -10)
 
 [node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 visible = false
+material_override = SubResource("StandardMaterial3D_dehba")
 mesh = SubResource("CylinderMesh_kek77")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
