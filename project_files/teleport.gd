@@ -19,7 +19,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if ray.is_colliding():
-		marker.global_transform.origin = ray.get_collision_point()
+		var hit_point = ray.get_collision_point()
+		marker.global_transform.origin = Vector3(hit_point.x, 0.0, hit_point.z)
 		marker.visible = true
 	else:
 		marker.visible = false
@@ -56,16 +57,30 @@ func handle_snap_turn() -> void:
 		# Blokujemy obrót, dopóki gracz nie puści gałki
 		can_snap_turn = false
 
+@export var player_radius: float = 0.4
+
 func teleport_now() -> void:
 	if not ray.is_colliding():
 		return
+	
 	var target: Vector3 = ray.get_collision_point()
+	var normal: Vector3 = ray.get_collision_normal()
+
+	normal.y = 0.0
+	normal = normal.normalized() # Ponowne sprowadzenie wektora do długości 1
+	
+	# 2. MODYFIKACJA PUNKTU: Przesuwamy punkt docelowy lekko w stronę gracza
+	var safe_target: Vector3 = target + (normal * player_radius)
 
 	var origin_tf := xr_origin.global_transform
 	var cam_tf := xr_camera.global_transform
+	
 	var cam_offset := cam_tf.origin - origin_tf.origin
 	cam_offset.y = 0.0
-	origin_tf.origin = Vector3(target.x - cam_offset.x, 0.0, target.z - cam_offset.z)
+	
+	# Używamy safe_target zamiast surowego target
+	origin_tf.origin = Vector3(safe_target.x - cam_offset.x, 0.0, safe_target.z - cam_offset.z)
+	
 	xr_origin.global_transform = origin_tf
 
 func _on_button_pressed(button_name: String) -> void:
