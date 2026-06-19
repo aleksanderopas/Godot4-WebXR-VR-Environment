@@ -19,7 +19,7 @@ Projekt wspiera natywne renderowanie stereoskopowe (Side-by-Side dla WebXR API) 
 
 | Środowisko testowe z obiektami prymitywnymi | Środowisko testowe z modelem budynku |
 |---|---|
-| ![Widok 1](https://raw.githubusercontent.com/aleksanderopas/vr/main/Zrzut%20ekranu%202026-06-19%20192301.png) | ![Widok 2](https://raw.githubusercontent.com/aleksanderopas/vr/main/Zrzut%20ekranu%202026-06-19%20192230.png) |
+| ![Widok 1](https://raw.githubusercontent.com/aleksanderopas/vr/teleport/Zrzut%20ekranu%202026-06-19%20192301.png) | ![Widok 2](https://raw.githubusercontent.com/aleksanderopas/vr/teleport/Zrzut%20ekranu%202026-06-19%20192230.png) |
 
 ---
 
